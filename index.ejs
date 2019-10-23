@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Coordinator</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link rel='stylesheet' href='/stylesheets/style.css'>
+</head>
+<body>
+<nav class="navbar navbar-inverse navfontcolor">
+  <div class="container-fluid">  
+     <ul class="nav navbar-nav">  
+      <li><img src="http://127.0.0.1:5501/Score/public/img/logo.png" width="50px" height="50px"></li>
+      <li><img src="http://127.0.0.1:5501/Score/public/img/nname.png" width="150px" height="50px"></li>
+      <li><a href="http://127.0.0.1:5501/Score/views/index.ejs">Home</a></li>
+      <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Bootcamp
+      <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="http://localhost:4040/employees/create">BC-78</a></li>
+                <li><a href="http://localhost:4040/employees/create">BC-79</a></li>
+                <li><a href="http://localhost:4040/employees/create">BC-80</a></li>
+                <li><a href="http://localhost:4040/employees/create">BC-81</a></li>
+                </ul>
+       </li>
+      <li><a href="#">Feedback</a></li> 
+      <li><a href="#">Logout</a></li>
+    </ul>
+    <form class="navbar-form navbar-right" action="/action_page.php">
+      <div id="search">
+        <div id="search-search-icon"></div>
+        <div id="search-text"></div>
+        <input id="search-input" autocomplete="off" tabindex="-1" type="url"
+            aria-hidden="true" placeholder="Search">
+            <button type="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+        <div id="search-cursor"></div>
+  </div>
+    </form>
+  </div>
+</nav>
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <img src="http://127.0.0.1:5501/Score/views/skills.jpg" alt="..." class="img-responsive">
+        <div class="carousel-caption">
+        </div>
+      </div>
+      </div>
+  </body>
+</html>
