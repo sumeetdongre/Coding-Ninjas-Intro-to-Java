@@ -1,0 +1,21 @@
+package javaafter;
+
+import java.util.Scanner;
+
+public class wholestringreverse {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner s=new Scanner(System.in);
+		String str=s.nextLine();
+		char st[]=str.toCharArray();
+		for(int i=0;i<st.length/2;i++)
+		{
+			char t=st[i];
+			st[i]=st[st.length-1-i];
+			st[st.length-1-i]=t;
+		}
+		String tt=new String(st);
+		System.out.println(tt);
+	}
+}
