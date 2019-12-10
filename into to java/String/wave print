@@ -1,0 +1,73 @@
+Given a two dimensional n*m array, print the array in a sine wave order. i.e. print the first column top to bottom, next column bottom to top and so on.
+Note : Print the elements separated by space.
+Input format :
+n, m, array elements (separated by space)
+Sample Input :
+3 4 1  2  3  4 5  6  7  8 9 10 11 12
+Sample Output :
+1 5 9 10 6 2 3 7 11 12 8 4
+
+
+import java.util.Scanner;
+
+
+public class Main {
+	
+	static Scanner s = new Scanner(System.in);
+	
+	
+	public static int[][] takeInput2D(){
+		
+		int numRows = s.nextInt();
+		int numCols = s.nextInt();
+		int[][] input = new int[numRows][numCols];
+		for(int i = 0; i < numRows; i++){
+			for(int j = 0; j < numCols; j++){
+				input[i][j] = s.nextInt();
+			}
+		}
+		return input;
+	}
+	
+	
+	public static void main(String[] args) {
+	
+		int input[][] = takeInput2D();
+		Solution.wavePrint(input);
+		
+	}
+
+}
+
+
+public class Solution {
+
+	
+	// input - input 2D array
+	public static void wavePrint(int a[][]){
+		
+		// Write your code here
+    System.out.println();
+		int row=a.length;
+		int col=a[0].length;
+		for(int i=0;i<col;i++)
+		{
+			if(i%2==0)
+			{
+				for(int j=0;j<row;j++)
+				{
+					System.out.print(a[j][i]+" ");
+				}
+			}
+			else
+			{
+				for(int j=row-1;j>=0;j--)
+				{
+					System.out.print(a[j][i]+" ");
+				}
+            }
+		
+        }
+
+    }	
+}
