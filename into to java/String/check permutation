@@ -1,0 +1,56 @@
+Given two strings, check if they are permutations of each other. Return true or false.
+Permutation means - length of both the strings should same and should contain same set of characters. Order of characters doesn't matter.
+Note : Input strings contain only lowercase english alphabets.
+Input format :
+Line 1 : String 1
+Line 2 : String 2
+Sample Input 1 :
+abcde
+baedc
+Sample Output 1 :
+true
+Sample Input 2 :
+abc
+cbd
+Sample Output 2 :
+false
+
+import java.util.Scanner;
+
+public class runner {
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		String input1 = s.next();
+		String input2 = s.next();
+		System.out.println(solution.isPermutation(input1, input2));
+	}
+}
+
+import java.util.*;
+public class solution {
+
+	public static boolean isPermutation(String str1, String str2) {
+	    // Write your code here
+    int n1 = str1.length();  
+    int n2 = str2.length();  
+  
+    // If length of both strings is not same,  
+    // then they cannot be Permutation  
+    if (n1 != n2)  
+    return false;  
+    char ch1[] = str1.toCharArray(); 
+    char ch2[] =  str2.toCharArray(); 
+  
+    // Sort both strings  
+    Arrays.sort(ch1);  
+    Arrays.sort(ch2);  
+  
+    // Compare sorted strings  
+    for (int i = 0; i < n1; i++)  
+    if (ch1[i] != ch2[i])  
+        return false;  
+  
+    return true;  
+
+	}
+}
