@@ -1,0 +1,76 @@
+Longest subset zero sum
+Send Feedback
+Given an array consisting of positive and negative integers, find the length of the longest continuous subset whose sum is zero.
+NOTE: You have to return the length of longest subset .
+Input Format :
+Line 1 : Contains an integer N i.e. size of array
+
+Line 2 : Contains N elements of the array, separated by spaces
+Output Format
+ Line 1 : Length of longest continuous subset 
+Sample Input :
+10 
+ 95 -97 -387 -435 -5 -70 897 127 23 284
+Sample Output :
+5
+
+import java.util.*;
+
+public class runner 
+{
+	public static void main(String[] args) 
+	{
+		Scanner scan = new Scanner(System.in);
+		ArrayList<Integer> arr = new ArrayList<>();
+
+		int size = scan.nextInt();
+		for(int i = 0; i < size; i++)
+			arr.add(scan.nextInt());
+
+		System.out.println(solution.lengthOfLongestSubsetWithZeroSum(arr));
+		scan.close();
+	}
+}
+
+//5 1 2 -2 4 -4
+
+import java.util.*;
+
+/*
+	- You are given an integer array containing positive and negative numbers.
+	- Your task is to find out the length of the longest continuous subset of this array whose elements add upto zero.
+
+*/
+
+public class solution 
+{
+    public static int lengthOfLongestSubsetWithZeroSum(ArrayList<Integer> arr) 
+   	{
+		//	write your code here.
+
+		HashMap<Integer, Integer> map = new HashMap<>();    //first is value, second is index
+		int maxLength = 0, sum = 0;
+		
+		for (int i = 0; i < arr.size(); i++) {
+			sum += arr.get(i);
+			
+			if (arr.get(i) == 0 && maxLength == 0) {
+				maxLength = 1;
+			}
+			
+			if (sum == 0) {
+				maxLength = i + 1;
+			}
+			
+			Integer pI = map.get(sum);
+			
+			if (pI != null) {
+				maxLength = Math.max(maxLength, i - pI);
+			} else {
+				map.put(sum, i);
+			}
+		}
+
+		return maxLength;
+	}
+}
