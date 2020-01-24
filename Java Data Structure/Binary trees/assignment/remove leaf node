@@ -1,0 +1,222 @@
+Remove Leaf nodes
+Send Feedback
+Remove all leaf nodes from a given Binary Tree. Leaf nodes are those nodes, which don't have any children.
+Note : Root will also be a leaf node if it doesn't have left and right child. You don't need to print the tree, just remove all leaf nodes and return the updated root.
+Input format :
+
+Elements in level order form (separated by space)
+
+(If any node does not have left or right child, take -1 in its place)
+
+Output Format :
+
+Elements are printed level wise, each level in new line (separated by space).
+
+Sample Input :
+8 3 10 1 6 -1 14 -1 -1 4 7 13 -1 -1 -1 -1 -1 -1 -1
+Sample Output :
+8
+3 10
+6 14                    
+
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class QueueEmptyException extends Exception {
+}
+
+class Node<T> {
+	T data;
+	Node<T> next;
+	Node(T data){
+		this.data = data;
+	}
+}
+
+class QueueUsingLL<T> {
+
+
+	private Node<T> head;
+	private Node<T> tail;
+	private int size = 0;
+
+	public int size(){
+		return size;
+	}
+
+	public boolean isEmpty(){
+		if(size == 0){
+			return true;
+		}
+		return false;
+	}
+
+	public T front() throws QueueEmptyException{
+		if(size == 0){
+			QueueEmptyException e = new QueueEmptyException();
+			throw e;
+		}
+
+		return head.data;
+	}
+
+
+	public void enqueue(T element){
+		Node<T> newNode = new Node<T>(element);
+
+		if(head == null){
+			head = newNode;
+			tail = newNode;
+		}
+		else{
+			tail.next = newNode;
+			tail = newNode;
+		}
+
+		size++;
+	}
+
+	public T dequeue() throws QueueEmptyException{
+		if(head == null){
+			QueueEmptyException e = new QueueEmptyException();
+			throw e;
+		}
+		if(head == tail){
+			tail = null;
+		}
+		T temp = head.data;
+		head = head.next;
+		size--;
+		return temp;
+	}
+}
+
+class BinaryTreeNode<T> {
+	T data;
+	BinaryTreeNode<T> left;
+	BinaryTreeNode<T> right;
+
+	public BinaryTreeNode(T data) {
+		this.data = data;
+	}
+}
+
+public class Main {
+	static Scanner s = new Scanner(System.in);
+
+	public static BinaryTreeNode<Integer> takeInput(){
+		QueueUsingLL<BinaryTreeNode<Integer>>  pendingNodes = new QueueUsingLL<BinaryTreeNode<Integer>>(); 
+		Scanner s = new Scanner(System.in);
+		int rootData = s.nextInt();
+		BinaryTreeNode<Integer> root = new BinaryTreeNode<Integer>(rootData);
+		pendingNodes.enqueue(root);
+
+		while(!pendingNodes.isEmpty()){
+			BinaryTreeNode<Integer> currentNode;
+			try {
+				currentNode = pendingNodes.dequeue();
+			} catch (QueueEmptyException e) {
+				return null;
+			}
+			int leftChildData = s.nextInt();
+			if(leftChildData != -1){
+				BinaryTreeNode<Integer> leftChild = new BinaryTreeNode<Integer>(leftChildData);
+				currentNode.left = leftChild;
+				pendingNodes.enqueue(leftChild);
+			}
+			int rightChildData = s.nextInt();
+			if(rightChildData != -1){
+				BinaryTreeNode<Integer> rightChild = new BinaryTreeNode<Integer>(rightChildData);
+				currentNode.right = rightChild;
+				pendingNodes.enqueue(rightChild);
+			}
+		}
+		return root;
+	}
+
+	public static void printLevelWiseAtDiffLevel(BinaryTreeNode<Integer> root){
+		QueueUsingLL<BinaryTreeNode<Integer>>  primary = new QueueUsingLL<>();
+		QueueUsingLL<BinaryTreeNode<Integer>>  secondary = new QueueUsingLL<>();
+
+		primary.enqueue(root);
+
+		while(!primary.isEmpty()){
+			BinaryTreeNode<Integer> current=null;
+			try {
+				current = primary.dequeue();
+			} catch (QueueEmptyException e) {
+				System.out.println("Not possible");
+			}
+			System.out.print(current.data + " ");
+			if(current.left != null){
+				secondary.enqueue(current.left);
+			}
+			if(current.right != null){
+				secondary.enqueue(current.right);
+			}
+			if(primary.isEmpty()){
+				QueueUsingLL<BinaryTreeNode<Integer>>  temp = secondary;
+				secondary = primary;
+				primary = temp;
+				System.out.println();
+			}
+		}
+	}
+
+
+	
+	public static void main(String[] args) {
+		BinaryTreeNode<Integer> root = takeInput();
+		root = Solution.removeAllLeaves(root);
+		printLevelWiseAtDiffLevel(root);
+	}
+}
+
+import java.util.ArrayList;
+
+
+public class Solution {
+
+	/*	Binary Tree Node class
+	 * 
+	 * class BinaryTreeNode<T> {
+		T data;
+		BinaryTreeNode<T> left;
+		BinaryTreeNode<T> right;
+
+		public BinaryTreeNode(T data) {
+			this.data = data;
+		}
+	}
+	 */
+
+	public static BinaryTreeNode<Integer> removeAllLeaves(BinaryTreeNode<Integer> root){
+		
+		// Write your code here
+       if(root==null)
+       {
+            //if its null then we need to return some new node but not null
+            //to identify the actual nodes where both left and right pointers are null
+            return null;
+        }
+        if(root.left==null&&root.right==null){//checking both pointers
+            return null;
+        }
+        BinaryTreeNode<Integer> value1;
+        BinaryTreeNode<Integer> value2;
+        
+        value1=removeAllLeaves(root.left);
+        value2=removeAllLeaves(root.right);
+        if(value1==null){//if value1 null then it means both its pointers are null but not a new node(not null values)
+            root.left=null;
+        }
+        if(value2==null){//same as above
+            root.right=null;
+        }
+        return root;//updated root 
+	}
+
+
+
+}
