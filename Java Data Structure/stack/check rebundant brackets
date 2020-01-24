@@ -1,0 +1,72 @@
+Check redundant brackets
+Send Feedback
+Given a string mathematical expression, return true if redundant brackets are present in the expression. Brackets are redundant if there is nothing inside the bracket or more than one pair of brackets are present.
+Assume the given string expression is balanced and contains only one type of bracket i.e. ().
+Note: You will not get partial score for this problem. You will get marks only if all test cases are passed.
+Input Format :
+String s (Expression)
+Output Format :
+true or false
+Sample Input 1:
+((a + b)) 
+Sample Output 1:
+true
+Sample Input 2:
+(a+b) 
+Sample Output 2:
+false
+
+import java.util.Scanner;
+
+public class Main {
+	static Scanner s = new Scanner(System.in);
+	
+	public static void main(String[] args) {
+		String input = s.nextLine();
+		System.out.println(solution.checkRedundantBrackets(input));
+	}
+}
+
+import java.util.Stack;
+
+public class solution {
+	
+	public static boolean checkRedundantBrackets(String s) {
+		// Write your code here
+    Stack<Character> st = new Stack<>(); 
+        char[] str = s.toCharArray(); 
+        // Iterate through the given expression  
+        for (char ch : str) { 
+  
+            // if current character is close parenthesis ')'  
+            if (ch == ')') { 
+                char top = st.peek(); 
+                st.pop(); 
+  
+                // If immediate pop have open parenthesis '('  
+                // duplicate brackets found  
+                boolean flag = true; 
+  
+                while (top != '(') { 
+                    if (top == '+' || top == '-'
+                            || top == '*' || top == '/') { 
+                        flag = false; 
+                    } 
+  
+                    // Fetch top element of stack  
+                    top = st.peek(); 
+                    st.pop(); 
+                } 
+  
+                // If operators not found  
+                if (flag == true) { 
+                    return true; 
+                } 
+            } else 
+            { 
+                st.push(ch); // push open parenthesis '(',  
+            }                // operators and operands to stack  
+        } 
+        return false; 
+	}
+}
