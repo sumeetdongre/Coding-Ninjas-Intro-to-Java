@@ -1,0 +1,85 @@
+Minimum bracket Reversal
+Send Feedback
+Given a string expression which consists only ‘}’ and ‘{‘. The expression may not be balanced. You need to find the minimum number of bracket reversals which are required to make the expression balanced.
+Return -1 if the given expression can't be balanced.
+Input Format :
+String S
+Output Format :
+Required count
+Sample Input 1 :
+{{{
+Sample Output 1 :
+-1
+Sample Input 2 :
+{{{{}}
+Sample Output 2 :
+1
+
+
+import java.util.Scanner;
+
+
+
+public class Main {
+
+	static Scanner s = new Scanner(System.in);
+	public static void main(String[] args) {
+
+		String str = s.nextLine();
+		System.out.println(Solution.countBracketReversals(str));
+
+	}
+
+}
+
+
+
+
+import java.util.*;
+public class Solution {
+
+	
+	// Function returns -1 if brackets can't be balanced
+	public static int countBracketReversals(String expr){
+		
+		// Write your code here
+        int len = expr.length(); 
+    
+        if (len%2 != 0) 
+        return -1; 
+      
+        Stack<Character> s=new Stack<>(); 
+          
+        for (int i=0; i<len; i++) 
+        { 
+            char c = expr.charAt(i); 
+            if (c =='}' && !s.empty()) 
+            { 
+                if (s.peek()=='{') 
+                    s.pop(); 
+                else
+                    s.push(c); 
+            } 
+            else
+                s.push(c); 
+        } 
+      
+    
+        int red_len = s.size(); 
+      
+     
+        int n = 0; 
+        while (!s.empty() && s.peek() == '{') 
+        { 
+            s.pop(); 
+            n++; 
+        } 
+      
+        
+        return (red_len/2 + n%2); 
+
+	}
+	
+	
+
+}
