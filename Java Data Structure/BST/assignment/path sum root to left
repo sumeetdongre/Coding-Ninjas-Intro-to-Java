@@ -1,0 +1,199 @@
+Path Sum Root to Leaf
+Send Feedback
+Given a binary tree and a number k, print out all root to leaf paths where the sum of all nodes value is same as the given number k.
+Input format :
+
+Line 1 : Elements in level order form (separated by space)
+
+(If any node does not have left or right child, take -1 in its place)
+
+Line 2 : k
+
+Output format : Print each path in new line, elements separated by space
+
+Sample Input 1 :
+5 6 7 2 3 -1 1 -1 -1 -1 9 -1 -1 -1 -1
+13
+Sample Output 1 :
+5 6 2
+5 7 1
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class QueueEmptyException extends Exception {
+}
+
+class Queue<T> {
+
+	class Node<T> {
+		T data;
+		Node<T> next;
+		Node(T data){
+			this.data = data;
+		}
+	}
+
+	private Node<T> head;
+	private Node<T> tail;
+	private int size = 0;
+
+	public int size(){
+		return size;
+	}
+
+	public boolean isEmpty(){
+		if(size == 0){
+			return true;
+		}
+		return false;
+	}
+
+	public T front() throws QueueEmptyException{
+		if(size == 0){
+			QueueEmptyException e = new QueueEmptyException();
+			throw e;
+		}
+
+		return head.data;
+	}
+
+
+	public void enqueue(T element){
+		Node<T> newNode = new Node<T>(element);
+
+		if(head == null){
+			head = newNode;
+			tail = newNode;
+		}
+		else{
+			tail.next = newNode;
+			tail = newNode;
+		}
+
+		size++;
+	}
+
+	public T dequeue() throws QueueEmptyException{
+		if(head == null){
+			QueueEmptyException e = new QueueEmptyException();
+			throw e;
+		}
+		if(head == tail){
+			tail = null;
+		}
+		T temp = head.data;
+		head = head.next;
+		size--;
+		return temp;
+	}
+}
+
+class BinaryTreeNode<T> {
+	T data;
+	BinaryTreeNode<T> left;
+	BinaryTreeNode<T> right;
+
+	public BinaryTreeNode(T data) {
+		this.data = data;
+	}
+}
+
+public class Runner {
+	static Scanner s = new Scanner(System.in);
+static int k;
+
+	public static BinaryTreeNode<Integer> takeInput(){
+		Queue<BinaryTreeNode<Integer>>  pendingNodes = new Queue<BinaryTreeNode<Integer>>(); // we can skip writing again inside <> after java version 1.7 
+		Scanner s = new Scanner(System.in);
+		int rootData = s.nextInt();
+		BinaryTreeNode<Integer> root = new BinaryTreeNode<Integer>(rootData);
+		pendingNodes.enqueue(root);
+
+		while(!pendingNodes.isEmpty()){
+			BinaryTreeNode<Integer> currentNode;
+			try {
+				currentNode = pendingNodes.dequeue();
+			} catch (QueueEmptyException e) {
+				return null;
+			}
+			int leftChildData = s.nextInt();
+			if(leftChildData != -1){
+				BinaryTreeNode<Integer> leftChild = new BinaryTreeNode<Integer>(leftChildData);
+				currentNode.left = leftChild;
+				pendingNodes.enqueue(leftChild);
+			}
+			int rightChildData = s.nextInt();
+			if(rightChildData != -1){
+				BinaryTreeNode<Integer> rightChild = new BinaryTreeNode<Integer>(rightChildData);
+				currentNode.right = rightChild;
+				pendingNodes.enqueue(rightChild);
+			}
+		}
+ k = s.nextInt();
+
+		return root;
+	}
+	
+	public static void main(String[] args) {
+		BinaryTreeNode<Integer> root = takeInput();
+				Solution. rootToLeafPathsSumToK(root,k);
+	}
+}
+
+public class Solution {
+
+/*	Binary Tree Node class
+ * 
+ * class BinaryTreeNode<T> {
+		T data;
+		BinaryTreeNode<T> left;
+		BinaryTreeNode<T> right;
+		
+		public BinaryTreeNode(T data) {
+			this.data = data;
+		}
+	}
+	*/
+	
+	public static void rootToLeafPathsSumToK(BinaryTreeNode<Integer> root, int k) {
+		// Write your code here
+        int[] path=new int[1000];
+    	RootToLeafPathsSumToK(root,path,0,k);
+    }
+	public static void RootToLeafPathsSumToK(BinaryTreeNode<Integer> root, int path[],int index,int k) 
+	{
+		if(root==null)
+		{
+			return;
+		}
+		path[index]=root.data;
+		index++;
+		if(root.left==null && root.right==null)
+		{
+			printpath(path,index,k);
+		}
+		else
+		{
+			RootToLeafPathsSumToK(root.left,path,index,k);
+			RootToLeafPathsSumToK(root.right,path,index,k);
+		}
+		
+	}
+    public static void printpath(int path[],int index,int k)
+	{
+		int sum=0;
+		for(int i=0;i<index;i++)
+		{
+			sum=sum+path[i];
+		}
+		if(sum==k)
+		{
+			for(int i=0;i<index;i++)
+			{
+				System.out.print(path[i]+ " ");
+			}
+			System.out.println();
+		}
+	}
+}
