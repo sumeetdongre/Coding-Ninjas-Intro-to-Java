@@ -1,0 +1,95 @@
+Print Intersection
+Send Feedback
+Given two random integer arrays, print their intersection. That is, print all the elements that are present in both the given arrays.
+Input arrays can contain duplicate elements.
+Note : Order of elements are not important
+Input format :
+Line 1 : Integer N, Array 1 Size
+Line 2 : Array 1 elements (separated by space)
+Line 3 : Integer M, Array 2 Size
+Line 4 : Array 2 elements (separated by space)
+Output format :
+Print intersection elements in different lines
+Constraints :
+1 <= M, N <= 10^6
+Sample Input 1 :
+6
+2 6 8 5 4 3
+4
+2 3 4 7 
+Sample Output 1 :
+2 
+4 
+3
+Sample Input 2 :
+4
+2 6 1 2
+5
+1 2 3 4 2
+Sample Output 2 :
+2 
+2
+1
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+	
+	static Scanner s = new Scanner(System.in);
+	public static int[] takeInput() {
+		int size = s.nextInt();
+		int arr[] = new int[size];
+		for (int i = 0; i < size; i++) {
+			arr[i] = s.nextInt();
+		}
+		return arr;
+	}
+
+	public static void print(ArrayList<Integer> list) {
+		for (int i : list) {
+			System.out.print(i+" ");
+		}
+	}
+	
+	public static void main(String[] args) {
+		int[] arr1 = takeInput();
+		int[] arr2 = takeInput();
+		Intersection.intersection(arr1, arr2);
+	}
+}
+
+import java.util.*;
+
+public class Solution {
+	public static void PairSum(int[] input, int size) {
+		
+		/* Your class should be named Solution
+		 * Don't write main().
+		 * Don't read input, it is passed as function argument.
+		 * Print the desired output and don't return anything.
+	 	 * Taking input is handled automatically.
+		 */
+        HashMap<Integer, Integer> map=new HashMap<>();
+		for(int i=0;i<size;i++)
+		{
+			map.put(input[i], input[i]);
+		}	
+		for(int i=0;i<size;i++){
+				int x=map.get(input[i]);
+				for(int ii=0;ii<size;ii++)
+				{
+
+					if(x==map.get(input[ii]))
+					{
+						continue;
+					}
+						if(x +map.get(input[ii])==0 || x -map.get(input[ii])==0)
+						{
+							System.out.println(x + " "+ map.get(input[ii]));
+						}
+                }
+        }
+				
+	}
+}
