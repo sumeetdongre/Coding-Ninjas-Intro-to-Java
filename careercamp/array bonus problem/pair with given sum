@@ -1,0 +1,59 @@
+Pair with given sum
+Send Feedback
+Given an array that is sorted and then rotated around an unknown point. Find if the array has a pair with a given sum ‘x’. It may be assumed that all elements in the array are distinct.
+Expected Time Complexity: O(n)
+Input format:
+The first line of input contains an integer that denotes the size of the array (n). The following line contains n space-separated integer elements of the array and the last line of input contains an integer that denotes the value of the given sum x.
+Constraints:
+Time Limit: 1second
+The value of n lies in the range: [1, 1000000]
+The elements of array lies in the range: [-1e9, 1e9].
+The value of x lies in the range: [-1e9, 1e9].  
+Output format:
+The only line of the output contains either true (if the given array has a pair with a given sum 'x') or false(if the given array doesn't have a pair with a given sum 'x') 
+Sample Input:
+6
+11 15 26 38 9 10
+45
+Sample Output:
+false
+
+import java.util.Scanner;
+import java.util.*;
+
+public class Main {
+    
+	
+	public static void main(String[] args) {
+		/* Your class should be named Main.
+ 			* Read input as specified in the question.
+ 			* Print output as specified in the question.
+		*/
+
+		// Write your code here
+        Scanner s=new Scanner(System.in);
+        int n=s.nextInt();
+        int arr[]=new int[n];
+        for(int i=0;i<n;i++){
+            arr[i]=s.nextInt();
+        }
+        int ser=s.nextInt();
+        
+        System.out.print(checkvalue(arr,ser));
+    }
+      public static boolean checkvalue(int arr[],int ser){
+      Arrays.sort(arr);
+        int l=0;
+        int n=arr.length-1;
+        while(l<n){
+            if(arr[l]+arr[n]==ser)
+                return true;
+            else if(arr[l]+arr[n]<ser)
+                l++;
+            else
+                n--;
+        }
+        return false;
+        
+      }
+}
