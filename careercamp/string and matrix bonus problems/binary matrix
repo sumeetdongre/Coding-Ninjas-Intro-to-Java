@@ -1,0 +1,71 @@
+Binary Matrix
+Send Feedback
+You are given a matrix mat[M][N] of size M X N having 0's and 1's only, you have to modify it such that if a matrix cell mat[i][j] is 1, then make all the cells of ith row and jth column as 1.
+Note: Try doing it without any extra space.
+Input Format:
+The first line of input contains the number of rows(M) of the input matrix, the following line of input contains the number of columns of the input matrix(N) and then the following M lines contain the input matrix.
+Output Format
+The M lines of output contain the modified matrix.
+Sample Input:
+3
+4
+1 0 0 1
+0 0 1 0
+0 0 0 0
+Sample Output:
+1 1 1 1
+1 1 1 1
+1 0 1 1
+
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner s=new Scanner(System.in);
+		int row=s.nextInt();
+		int col=s.nextInt();
+		int mat[][]=new int[row][col];
+		for(int i=0;i<row;i++){
+			for(int j=0;j<col;j++){
+				mat[i][j]=s.nextInt();
+			}
+		}
+        
+        int[][] ans = new int[row][col];
+		
+		for(int i=0;i<row;i++)
+		{
+			for(int j=0;j<col;j++){
+                
+				if(mat[i][j]==1){
+					convert(ans,i,j);
+				}
+			}
+		}
+        
+		mat = ans;
+		
+		for(int i=0;i<row;i++){
+			for(int j=0;j<col;j++){
+				System.out.print(mat[i][j]+" ");
+			}
+			System.out.println();
+		}
+	}
+
+	private static void convert(int[][] mat, int x, int y) {
+		// TODO Auto-generated method stub
+		
+        for(int i = 0; i<mat.length; i++){
+            mat[i][y] = 1;
+        }
+        
+        for(int i = 0; i < mat[0].length; i++){
+            mat[x][i]=1;
+        }
+        
+	}
+	
+}
