@@ -1,0 +1,121 @@
+First Palindrome
+Send Feedback
+Given a string S, you need to find and return the lexicographically first palindrome string that can be made using characters of S.
+Return an empty string if no palindrome can be created using S.
+Input Format :
+String S
+Output Format :
+Required palindrome
+Constraints :
+1 <= Length of S <= 1000
+Sample Input 1 :
+abcca
+Sample Output 1 :
+acbca
+Sample Input 2 :
+azxyaaz
+Sample Output 2 :
+"" (Empty String)
+
+public class Solution {
+
+    static char MAX_CHAR=26;
+	public static String nextPalindrome(String str) {
+		/* Your class should be named Solution
+		* Don't write main().
+		* Don't read input, it is passed as function argument.
+		* Return output and don't print it.
+		* Taking input and printing output is handled automatically.
+		*/
+        
+       	int len=str.length();
+		
+		int freq[] = new int[MAX_CHAR];
+		
+		countcharacterfreq(str,freq,len);
+		
+		if(!isplaindrome(freq,len))
+		{
+			return "";
+		}
+		
+		String midchar=middlechar(freq);
+		
+		String front_char="",back_char="";
+		
+		for(int i=0;i<MAX_CHAR;i++){
+			String temp="";
+			if(freq[i]!=0){
+				char ch=(char)(i+'a');
+				
+				for(int j=1;j<=freq[i]/2;j++){
+					temp=temp+ch;
+				}
+				
+				front_char=front_char+temp;
+                
+				back_char=temp+back_char;
+			}
+		}
+			
+		return (front_char+midchar+back_char);
+	}
+
+	public static String middlechar(int freq[]) {
+		// TODO Auto-generated method stub
+		
+		String middlestr="";
+		
+		for(int i=0;i<MAX_CHAR;i++){
+			if(freq[i]%2!=0)
+			{
+				freq[i]--;
+
+				middlestr+=(char)(i+'a');
+				
+				return middlestr;
+				
+			}		
+		}	
+	
+		return middlestr;
+	}
+
+	public static boolean isplaindrome(int[] freq,int len) {
+		// TODO Auto-generated method stub
+		
+		int oddchar=0;
+		
+		for(int i=0;i<MAX_CHAR;i++){
+			if(freq[i]%2!=0){
+				oddchar++;
+			}
+		}
+		
+		if(len%2==0)
+		{
+			if(oddchar>0){
+				return false; 
+			}
+			else{
+				return true;
+			}
+		}
+		
+		if(oddchar!=0)
+		{
+			return false;
+		}
+		
+		return true;
+	}
+  
+	public static void countcharacterfreq(String str, int[] freq, int len) {
+		// TODO Auto-generated method stub
+		
+		for(int i=0;i<len;i++){
+			
+		    freq[str.charAt(i)-'a']++;
+		}		
+	}
+}
