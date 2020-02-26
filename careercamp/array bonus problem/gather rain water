@@ -1,0 +1,56 @@
+Gather rain water
+Send Feedback
+Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.
+Please refer to Sample test case for more details.
+Input format:
+The first line of input contains size of the array, n (1 <= n <= 10000)
+The following line of input contains n space separated integers (each integer lies in the range: [0, 100000])
+Constraints:
+Time Limit: 1 second
+Output format:
+The first and only line of output contains integer, in accordance to the task.
+Sample Test case:
+Sample Input:
+6
+3 0 0 2 0 4
+Sample Output:
+10
+Explanation:
+Refer to the image for better comprehension:
+Alt Text
+
+import java.util.Scanner;
+import java.util.*;
+public class Main {
+
+	
+	public static void main(String[] args) {
+		/* Your class should be named Main.
+ 			* Read input as specified in the question.
+ 			* Print output as specified in the question.
+		*/
+
+		// Write your code here
+        Scanner s=new Scanner(System.in);
+        int n=s.nextInt();
+        int arr[]=new int[n];
+        for(int i=0;i<n;i++){
+            arr[i]=s.nextInt();
+        }
+      
+        System.out.print(trap(arr)); 
+        
+ }
+    public static int trap(int arr[]){
+        int level=0,l=0,r=arr.length-1,lower=0;
+        int res=0;
+        while(l<r){
+            lower=arr[arr[l]<arr[r]?l++:r--];
+            level=Math.max(lower,level);
+            res+=level-lower;
+        }
+        
+        return res;
+    }
+
+}
