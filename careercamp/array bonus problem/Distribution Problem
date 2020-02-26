@@ -1,0 +1,55 @@
+Anuj is one of the finest instructors at Coding Ninjas. He takes a batch of m students. He has been given n number of chocolate cartons. Each carton can have a variable number of chocolates. He has been given a task to distribute the chocolates to his students on the occasion of Holi. Now, here is the tricky part, he needs to distribute the chocolates in such a way that:
+1. Each student gets one carton of chocolate.
+2. The difference between the chocolate carton with the maximum number of chocolates and the carton with the minimum number of chocolates given to the students is minimum.
+Input format:
+The first line of input contains number of chocolate cartons, n (1 <= n <= 100). The following line contains n space separated integers (each integer lies in the range: [1, 10000] ). The following line of input contains number of children to whom those n carton are to be distributed, m (1 <= m <= n).  
+Constraints:
+Time Limit: 0.2 seconds
+Output format:
+The first only line of output contains the minimum difference possible between the student with maximum number of chocolates and the one with the minimum number of chocolates.
+Sample Test case:
+Sample Input:
+7
+7 3 2 4 9 12 56
+3
+Sample Output:
+2
+
+import java.util.Scanner;
+import java.util.*;
+public class Main {
+
+	
+	public static void main(String[] args) {
+		/* Your class should be named Main.
+ 			* Read input as specified in the question.
+ 			* Print output as specified in the question.
+		*/
+
+		// Write your code here
+        Scanner s=new Scanner(System.in);
+        int n=s.nextInt();
+        int arr[]=new int[n];
+        for(int i=0;i<arr.length;i++){
+            arr[i]=s.nextInt();
+        }
+        int m=s.nextInt();
+        
+        Arrays.sort(arr); 
+        
+        int min_diff = Integer.MAX_VALUE; 
+
+        int first = 0, last = 0; 
+        for (int i = 0; i + m - 1 < n; i++) 
+        { 
+            int diff = arr[i+m-1] - arr[i]; 
+            if (diff < min_diff) 
+            { 
+                min_diff = diff; 
+                first = i; 
+                last = i + m - 1; 
+            } 
+        } 
+        System.out.print(arr[last] - arr[first]); 
+	}
+}
