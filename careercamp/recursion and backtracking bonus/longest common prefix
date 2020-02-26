@@ -1,0 +1,75 @@
+Longest common prefix
+Send Feedback
+You are given n number of strings and you have to find the longest common prefix in all those strings.
+Input format:
+The first line of the input gives you the number of strings(n) and the following lines contains the input strings.
+Output Format:
+The only output line contains the longest common prefix of all the strings
+Sample Input:
+4
+Codingninjas
+Coding
+Coders
+Codezen
+Sample Output:
+Cod
+
+import java.util.Scanner;
+
+public class Runner {
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+
+		int n = s.nextInt();
+
+		String[] inputs = new String[n];
+		for(int i = 0; i < n; i++) {
+			inputs[i] = s.next();
+			
+		}
+
+		Solution.answer(inputs);
+	}
+}
+
+public class Solution {
+
+	public static void answer(String input[]) {
+        
+     System.out.print(ans(input));   
+        
+        
+    }
+		//Your code goes here
+        
+    public static String ans(String[] input){
+    
+        
+      //  int  j;
+        if(input==null || input.length==0)
+        {
+            return "";
+        }
+        
+        String lcp=input[0];
+        
+        for(int i=1;i<input.length;i++)
+        {
+            
+            int j=0;
+            String  currentword=input[i];     
+            
+            while(j<currentword.length() && j<lcp.length() &&  currentword.charAt(j)==lcp.charAt(j)){
+                j++;
+            }
+        
+        if(j==0)
+            
+            return "";
+    
+        
+        lcp=currentword.substring(0,j);
+        }
+        return lcp;
+}
+}
