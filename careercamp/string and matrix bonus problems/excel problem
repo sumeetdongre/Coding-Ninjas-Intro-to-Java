@@ -1,0 +1,58 @@
+Excel Problem
+Send Feedback
+In MS Excel you have columns pattern as A, B, C, … ,Z, AA, AB, AC,…. ,AZ, BA, BB, … ZZ, AAA, AAB ….. etc. This means, column 1 is named as “A”, column 2 as “B”, column 27 as “AA”.
+You are given a column number, and you have to find its corresponding Excel column name
+Input Format:
+The only input line contains the column number.
+Output Format:
+The only output line contains the column name corresponding to the column number.
+Constraints:
+Value of n should lie between [0,999999999]
+Sample Input:
+23
+Sample Output:
+W
+
+import java.util.Scanner;
+
+public class Main {
+
+	
+	public static void main(String[] args) {
+		/* Your class should be named Main.
+ 			* Read input as specified in the question.
+ 			* Print output as specified in the question.
+		*/
+
+		// Write your code here
+        
+        Scanner s=new Scanner(System.in);
+        int n=s.nextInt();
+        
+        excelprint(n);
+
+	}
+    
+    public static void excelprint(int n){
+        StringBuilder str=new StringBuilder();
+        
+      while(n>0)
+        {
+        int rem=n%26;
+        
+        if(rem==0){
+            str.append("Z");
+            n=(n/26)-1;
+            
+        }
+        else{
+            str.append((char)((rem-1)+'A'));
+            n=n/26;
+        }
+        
+        }
+        
+        System.out.println(str.reverse());
+    }
+
+}
