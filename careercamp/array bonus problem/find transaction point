@@ -1,0 +1,53 @@
+Find Transition Point
+Send Feedback
+You are given a sorted array of size n, containing only numbers 0 and 1, you have to find the transition point of the given input array. The transition point is a point where “0” ends and “1” begins.
+If there are no 1's in the input array then print -1.
+Note: Expected time complexity is O(log n).
+Input Format:
+The first line of input contains the size of the input array(n) and the following line of input contains n space-separated integer elements of the input array.
+Output format:
+The only output line contains the index of transition point in the input array.
+Constraints:
+ Value of n should not exceed 1000000.
+Sample Input:
+5
+0 0 0 1 1
+Sample Output:
+3
+
+import java.util.Scanner;
+
+public class Main {
+    
+    public static void main(String[] args)  
+    { 
+        Scanner s=new Scanner(System.in);
+        int n=s.nextInt();
+        int arr[]=new int[n];
+        for(int i=0;i<n;i++){
+            arr[i]=s.nextInt();
+        }
+        System.out.println(indexOfFirstOne(arr, 0,n - 1)); 
+          
+    } 
+
+	
+   public static int indexOfFirstOne(int arr[], int low,int high) 
+    { 
+        while (low <= high) { 
+            int mid = (low + high) / 2; 
+       
+            if (arr[mid] == 1 && (mid == 0 || arr[mid - 1] == 0)) 
+                return mid; 
+       
+            else if (arr[mid] == 1) 
+                high = mid - 1; 
+       
+            else
+                low = mid + 1; 
+        } 
+       
+        return -1; 
+    } 
+      
+}
