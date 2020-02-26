@@ -1,0 +1,45 @@
+Find binary number
+Send Feedback
+You are given an integral value n, you have to find all n-digit binary numbers such that the binary number must have more 1's than 0's for any prefix of the number.
+Input Format:
+The only input line contains the value of n.
+Output Format:
+The output contains binary numbers in different lines.
+Constraints:
+Value of n lies between [1,15]
+Sample Input:
+5
+Sample Output:
+11111
+11110
+11101
+11100
+11011
+11010
+11001
+10111
+10110
+10101
+
+public class Solution {
+	public static void printBinary(int n) {
+		//Your code goes here
+        
+        printbinary("",n,0,0);
+	}
+    
+    public static void  printbinary(String output,int n,int z,int o){
+        if(z>o)
+            return;
+        
+        if(n==0){
+            System.out.println(output);
+            return;
+        }
+        
+        printbinary(output+1,n-1,z,o+1);
+        
+        printbinary(output+0,n-1,z+1,o);
+        
+    }
+}
