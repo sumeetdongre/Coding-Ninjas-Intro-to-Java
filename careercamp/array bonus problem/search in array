@@ -1,0 +1,70 @@
+Search in an array
+Send Feedback
+Aahad and Harshit always have fun by solving problems. Harshit took a sorted array and rotated it clockwise by unknown amount. For example, he took a sorted array = [1, 2, 3, 4, 5] and if he rotates it by 2, then the array becomes: [4, 5, 1, 2, 3].
+After rotating a sorted array, Harshit gave Aahad a number which Harshit wanted him to search in the array. If he founds it, he had to shout the index of the number, otherwise he had to shout -1.
+Expected Time complexity of the code: O (log n)
+Input format:
+The first line of input contains size of the array: N (1 <= N <= 1000000).
+The second line contains N space separated integers: A[i] (-1e9 <= A[i] <= 1e9).
+The third line of input contains the key: the number which Harshit wants Aahad to search: key (-1e9 <= key <= 1e9)
+Constraints
+Time Limit: 1 second
+Output format:
+The first and only of output contains a integer (as specified in the task).
+Sample Input 1:
+5
+4 5 1 2 3
+1
+Sample Output 1:
+2
+
+import java.util.Scanner;
+
+public class Main {
+
+    
+    public static void main(String[] args)
+	{
+		Scanner s=new Scanner(System.in);
+        int n=s.nextInt();
+        int arr[]=new int[n];
+        for(int i=0;i<n;i++){
+            arr[i]=s.nextInt();
+        }
+        
+        int key=s.nextInt();
+
+		int index = searchElement(arr, key);
+
+		System.out.print(index);
+	}
+	
+	public static int searchElement(int[] A, int x)
+	{
+	   
+		int left = 0;
+		int right = A.length - 1;
+        
+		while (left <= right)
+		{
+			int mid = (left + right) / 2;
+
+		
+			if (A[mid] == x) {
+
+				return mid;
+			}
+
+			else if (x > A[mid]) {
+				left++;
+			}
+
+			else {
+				right--;
+			}
+		}
+
+		return -1;
+	}
+
+}
