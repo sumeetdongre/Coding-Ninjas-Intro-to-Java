@@ -1,0 +1,108 @@
+Largest Palindrome String
+Send Feedback
+You are given a string of all digits, you have to convert this string to a palindrome by changing at most K digits. If many solutions are possible then you have to print lexicographically largest possible string.
+If it is not possible to convert this string to a palindrome by changing at most k digits then print NOT POSSIBLE.
+Input Format:
+The first line of input contains the input string and the following line of input contains the value of k.
+Output Format:
+The only output line contains the palindrome string.
+Sample Input:
+41415
+3
+Sample Output:
+91919
+Explanation:
+Lexicographically largest palindrome 
+after 3 changes is "91919"
+
+import java.util.Scanner;
+
+public class Main {
+
+	
+	public static void main(String[] args) {
+		/* Your class should be named Main.
+ 			* Read input as specified in the question.
+ 			* Print output as specified in the question.
+		*/
+
+		// Write your code here
+        
+        Scanner in = new Scanner(System.in);
+        
+        String input = in.next();
+        
+        int k = in.nextInt();
+        
+        getMaxPalindrome(input,k);
+        
+
+	}
+    
+    public static void getMaxPalindrome(String s, int k){
+        
+        char[] arr = s.toCharArray();
+        
+        int left = 0, right = s.length()-1;
+        
+        while(left < right){
+            
+            
+            if(s.charAt(left) != s.charAt(right)){
+                
+                arr[left] = arr[right] = (char) Math.max(s.charAt(left),s.charAt(right));
+                k--;
+            }
+            left++;
+            right--;
+            
+        }
+        
+        if(k<0){
+            System.out.println("NOT POSSIBLE");
+            return;
+        }
+        
+        left = 0;
+        right = s.length() - 1;
+        
+        while(left <= right){
+            
+            
+            if(left == right){
+                
+                if(k>0) arr[left] = '9';
+            }
+            
+            
+            if(arr[left] < '9'){
+                
+                if(k>=2 && arr[left] == s.charAt(left) && arr[right] == s.charAt(right)){
+                
+                    arr[left] = arr[right] = '9';
+                    k-=2;
+                }
+            
+                else if(k>=1 && (arr[left] != s.charAt(left) || arr[right] != s.charAt(right))){
+                
+                    arr[left] = arr[right] = '9';
+                    k--;
+                }
+            }
+            
+            left++;
+            right--;
+            
+        }
+          
+        String ans = "";
+        
+        for(char c : arr){
+            ans+=c;
+        }
+        
+        System.out.println(ans);
+        
+    }
+
+}
