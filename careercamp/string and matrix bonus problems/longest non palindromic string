@@ -1,0 +1,72 @@
+Longest Non-Palindromic String
+Send Feedback
+You are given a string. You have is to find the length of the largest possible substring which is not a palindrome.
+Input Format:
+The only input line contains the input string.
+Output Format:
+The only output line contains the length of the largest non-palindromic string.
+Sample Input:
+abcba
+Sample Output:
+4
+
+import java.util.Scanner;
+
+public class Main {
+
+	
+	public static void main(String[] args) {
+        
+        Scanner s=new Scanner(System.in);
+        String str=s.next();
+        
+        
+        System.out.print(longestpalindrome(str));
+
+	}
+    
+    public static int longestpalindrome(String str){
+        
+        int n=str.length();
+        
+        char ch=str.charAt(0);
+        
+        int i;
+        
+        for(i=0;i<n;i++)
+        {
+            if(str.charAt(i)!=ch)
+            {
+                break;
+            }
+        }
+        
+        if(i==n)
+        {
+            return 0;
+        }
+        
+        if(ischeck(str))
+        {
+            return n-1;
+        }
+       
+        return n;
+    }
+    
+    public static boolean ischeck(String str){
+        
+        int s=0;
+        int e=str.length()-1;
+        
+        while(e>s){
+            if(str.charAt(s++)!=str.charAt(e--)){
+                return false;
+            }
+        }
+        
+        return true;
+        
+    }
+
+}
