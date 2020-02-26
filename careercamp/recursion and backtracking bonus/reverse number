@@ -1,0 +1,42 @@
+Reverse Number
+Send Feedback
+You are given an integer N, you have to find the reverse of this integer N.
+Input Format:
+The only input line contains the integer N
+Output Format:
+The only output line contains the reverse of this integer N.
+Constraints:
+Value of N should lie in the range [-100000000, 100000000]
+Sample Input:
+-4683
+Sample Output:
+-3864
+
+public class Solution {
+
+	public static int reverseInteger(int num) {
+		//Your code goes here
+        int ans=0;
+        
+        boolean isnegative=num<0;
+        
+        if(isnegative){
+            num=-num;
+        }
+        
+        while(num>0){
+            ans=ans*10+num%10;
+            num=num/10;
+        }
+        
+        if(isnegative){
+            ans=-ans;
+        }
+        
+        return (int)ans;
+        
+        
+        
+	}
+
+}
