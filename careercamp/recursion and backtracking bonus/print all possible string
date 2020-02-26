@@ -1,0 +1,52 @@
+Print all possible strings
+Send Feedback
+You are given a binary string containing '?' at some of its positions, you have to find all the possible binary strings that can be formed by replacing '?' by either '0' or '1'.
+Input Format:
+The only input line contains a binary string with '?' at some of its positions.
+Output Format:
+The output contains all the possible combinations of the input string by replacing '?' by either '0' or '1' in different lines
+Sample Input:
+110?01?1
+Sample Output:
+11000101
+11000111
+11010101
+11010111
+
+public class Solution {
+
+	public static void printAllPossibleStrings(String str) {
+		char[] arr=str.toCharArray();
+		
+		print(arr,0);
+		
+	}
+
+
+	private static void print(char[] str, int index)
+	{
+		// TODO Auto-generated method stub
+		
+		if(index==str.length){
+			System.out.println(str);
+			return;
+		}
+		
+		if(str[index]=='?')
+		{
+			
+			str[index]='0';
+            
+				print(str,index+1);
+			
+			str[index]='1';
+				print(str,index+1);
+			
+		str[index]='?';
+		}
+		else{
+			print(str,index+1);
+		}
+		
+	}
+}
